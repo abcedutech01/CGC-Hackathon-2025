@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard - Sewak-Desk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="user.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sewak-Desk - User Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-section="raise">Raise Ticket</a></li>
+                <li><a href="#" class="nav-link" data-section="track">Ticket Status</a></li>
+                <li><a href="#" class="nav-link" data-section="view">View All Tickets</a></li>
+                <li><a href="#" class="nav-link" data-section="profile">Profile & Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="dashboard" class="section-content active">
+            <h2>Welcome, End User!</h2>
+            <ul class="feature-list">
+                <li>Raise new support tickets easily for any technical, mechanical, or electrical issues.</li>
+                <li>Track the real-time status of your tickets and get notified on updates.</li>
+                <li>View all your submitted tickets with detailed information and history.</li>
+                <li>Manage your profile and notification preferences for a personalized experience.</li>
+            </ul>
+            <div style="margin-top:2rem; background:#2d2347; border-radius:12px; padding:1.5rem;">
+                <h3 style="color:#a259ff; margin-bottom:1rem;">How to Use QuickDesk</h3>
+                <ol style="color:#f3f3f3; margin-left:1.2rem;">
+                    <li><strong>Raise a Ticket:</strong> Click on <span style="color:#a259ff;">Raise Ticket</span> to
+                        submit your issue. Fill in all required details and attach any relevant files.</li>
+                    <li><strong>Track Progress:</strong> Use <span style="color:#a259ff;">Track Ticket</span> to check
+                        the status of your ticket using your ticket number.</li>
+                    <li><strong>View All Tickets:</strong> See a list of all your tickets, their statuses, and details
+                        in
+                        <span style="color:#a259ff;">View All Tickets</span>.
+                    </li>
+                    <li><strong>Update Profile:</strong> Go to <span style="color:#a259ff;">Profile & Settings</span> to
+                        update your information and change your password.</li>
+                </ol>
+                <div style="margin-top:1.5rem;">
+                    <strong style="color:#a259ff;">Tips:</strong>
+                    <ul style="color:#b8b8b8; margin-left:1.2rem;">
+                        <li>Provide clear and concise descriptions for faster resolution.</li>
+                        <li>Attach photos or videos if possible to help support staff understand your issue.</li>
+                        <li>Check your notifications for updates on your tickets.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="raise" class="section-content">
+            <h2>Raise Ticket</h2>
+            <form id="raise-ticket-form" enctype="multipart/form-data"
+                style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <label for="subject" style="display:block;margin-bottom:0.3rem;">Subject<span
+                        style="color:#a259ff;">*</span></label>
+                <input type="text" id="subject" name="subject" required
+                    style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;margin-bottom:1rem;">
+
+                <label for="description" style="display:block;margin-bottom:0.3rem;">Description<span
+                        style="color:#a259ff;">*</span></label>
+                <textarea id="description" name="description" required rows="4"
+                    style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;margin-bottom:1rem;"></textarea>
+
+                <label for="category" style="display:block;margin-bottom:0.3rem;">Category<span
+                        style="color:#a259ff;">*</span></label>
+                <select id="category" name="category" required
+                    style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;margin-bottom:1rem;">
+                    <option value="">Select Category</option>
+                    <option value="mechanical">Mechanical Issue</option>
+                    <option value="electrical">Electrical Issue</option>
+                    <option value="technical">Technical Issue</option>
+                </select>
+
+                <label for="attachment" style="display:block;margin-bottom:0.3rem;">Attachment (Photo/Video,
+                    optional)</label>
+                <input type="file" id="attachment" name="attachment" accept="image/*,video/*"
+                    style="margin-bottom:1.2rem; color:#f3f3f3;">
+
+                <button type="submit" class="cta-btn" style="width:100%;margin-top:0.5rem;">Submit Ticket</button>
+            </form>
+        </section>
+        <section id="track" class="section-content">
+            <h2>Ticket Status</h2>
+            <form id="search-ticket-form" style="max-width: 400px; margin: 0 auto; text-align: left;">
+                <label for="ticket-number" style="display:block;margin-bottom:0.3rem;">Enter Ticket Number<span
+                        style="color:#a259ff;">*</span></label>
+                <input type="text" id="ticket-number" name="ticket-number" required
+                    style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;margin-bottom:1rem;">
+
+                <button type="submit" class="cta-btn" style="width:100%;">Search</button>
+            </form>
+            <div id="ticket-status-result" style="margin-top:2rem; display:none;">
+                <h3 style="color:#a259ff;">Ticket Details</h3>
+                <p><strong>Ticket Number:</strong> <span id="result-ticket-number"></span></p>
+                <p><strong>Status:</strong> <span id="result-ticket-status"></span></p>
+                <div id="status-bar" style="margin-top:1.5rem;">
+                    <!-- Graphical status bar will be rendered here -->
+                </div>
+            </div>
+        </section>
+        <section id="view" class="section-content">
+            <h2>View All Tickets</h2>
+            <div id="agent-tickets-list" style="margin-top:1.5rem;">
+                <!-- Tickets will be rendered here -->
+            </div>
+            <!-- <p>View all your tickets and their details. (Ticket list goes here.)</p> -->
+        </section>
+        <section id="profile" class="section-content">
+            <h2>Profile & Settings</h2>
+            <form id="profile-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <div style="margin-bottom:1rem;">
+                    <label for="ro-name" style="display:block;margin-bottom:0.3rem;">RO Name</label>
+                    <input type="text" id="ro-name" name="ro-name" value="Apex Petroleum" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="ro-code" style="display:block;margin-bottom:0.3rem;">RO Code</label>
+                    <input type="text" id="ro-code" name="ro-code" value="PBT009" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="ro-location" style="display:block;margin-bottom:0.3rem;">RO Location</label>
+                    <input type="text" id="ro-location" name="ro-location" value="Ludhiana" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="username" style="display:block;margin-bottom:0.3rem;">Username</label>
+                    <input type="text" id="username" name="username" value="apex2025" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="password" style="display:block;margin-bottom:0.3rem;">Password</label>
+                    <input type="password" id="password" name="password" value="password" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <button type="button" id="edit-profile-btn" class="cta-btn" style="width:100%;margin-top:0.5rem;">Edit
+                    Profile</button>
+                <button type="submit" id="save-profile-btn" class="cta-btn"
+                    style="width:100%;margin-top:0.5rem;display:none;">Save Changes</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        // Navigation tab switching logic
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section-content');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.getAttribute('data-section');
+                sections.forEach(sec => {
+                    sec.classList.remove('active');
+                    if (sec.id === sectionId) sec.classList.add('active');
+                });
+            });
+        });
+
+        // Raise Ticket Form Validation
+        document.getElementById('raise-ticket-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const subject = document.getElementById('subject').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const category = document.getElementById('category').value;
+            if (!subject || !description || !category) {
+                alert('Please fill all required fields.');
+                return;
+            }
+            alert('Ticket submitted successfully!');
+            this.reset();
+        });
+
+        // Demo ticket data for status checking
+        const demoTickets = {
+            "TK1001": "Open",
+            "TK1002": "In Progress",
+            "TK1003": "Resolved",
+            "TK1004": "Closed"
+        };
+
+        // Status order for graphical representation
+        const statusSteps = ["Open", "In Progress", "Resolved", "Closed"];
+
+        // Search Ticket Status Logic
+        document.getElementById('search-ticket-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const ticketNum = document.getElementById('ticket-number').value.trim().toUpperCase();
+            const status = demoTickets[ticketNum] || null;
+            const resultDiv = document.getElementById('ticket-status-result');
+            const numSpan = document.getElementById('result-ticket-number');
+            const statusSpan = document.getElementById('result-ticket-status');
+            const statusBar = document.getElementById('status-bar');
+
+            if (!status) {
+                resultDiv.style.display = "block";
+                numSpan.textContent = ticketNum;
+                statusSpan.textContent = "Not Found";
+                statusSpan.style.color = "#ff4d4f";
+                statusBar.innerHTML = "<p style='color:#ff4d4f;'>No ticket found with this number.</p>";
+                return;
+            }
+
+            resultDiv.style.display = "block";
+            numSpan.textContent = ticketNum;
+            statusSpan.textContent = status;
+            statusSpan.style.color = "#a259ff";
+
+            // Build graphical status bar
+            let barHtml = `<div style="display:flex;align-items:center;gap:10px;">`;
+            statusSteps.forEach((step, idx) => {
+                const isActive = statusSteps.indexOf(status) >= idx;
+                barHtml += `
+                <div style="
+                    flex:1;
+                    height:18px;
+                    border-radius:9px;
+                    background:${isActive ? '#a259ff' : '#2d2347'};
+                    border:2px solid #a259ff;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    color:${isActive ? '#fff' : '#b8b8b8'};
+                    font-size:0.95rem;
+                    font-weight:600;
+                    min-width:90px;
+                    transition:background 0.3s;
+                ">
+                    ${step}
+                </div>
+                ${idx < statusSteps.length - 1 ? '<span style="color:#a259ff;font-size:1.3rem;">&#8594;</span>' : ''}
+            `;
+            });
+            barHtml += `</div>`;
+            statusBar.innerHTML = barHtml;
+        });
+
+        const agentTickets = [
+            {
+                number: "TK2001",
+                subject: "Network issue in Block A",
+                description: "Internet is not working in Block A, 2nd floor.",
+                category: "Technical Issue",
+                status: "Open",
+                raisedBy: "Apex Petroleum",
+                raisedAt: "2025-08-01 09:30 AM"
+            },
+            {
+                number: "TK2002",
+                subject: "AC not cooling",
+                description: "The AC in conference room is not cooling.",
+                category: "Mechanical Issue",
+                status: "In Progress",
+                raisedBy: "Apex Petroleum",
+                raisedAt: "2025-07-03 11:10 AM"
+            },
+            {
+                number: "TK2003",
+                subject: "Power socket sparking",
+                description: "Power socket in lab is sparking when used.",
+                category: "Electrical Issue",
+                status: "Open",
+                raisedBy: "Apex Petroleum",
+                raisedAt: "2025-07-05 02:45 PM"
+            }
+        ];
+
+        // Render agent tickets list
+        function renderAgentTickets() {
+            const container = document.getElementById('agent-tickets-list');
+            if (!agentTickets.length) {
+                container.innerHTML = "<p style='color:#b8b8b8;'>No tickets found for this month.</p>";
+                return;
+            }
+            let html = `<table style="width:100%;border-collapse:collapse;">
+                <thead>
+                    <tr style="background:#2d2347;">
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Ticket #</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Subject</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Category</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Status</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Raised By</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Raised At</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            agentTickets.forEach(ticket => {
+                html += `
+                    <tr class="agent-ticket-row" data-ticket="${ticket.number}" style="cursor:pointer;transition:background 0.2s;">
+                        <td style="padding:0.6rem;">${ticket.number}</td>
+                        <td style="padding:0.6rem;">${ticket.subject}</td>
+                        <td style="padding:0.6rem;">${ticket.category}</td>
+                        <td style="padding:0.6rem;">
+                            <span style="color:${ticket.status === 'Open' ? '#ffb347' : ticket.status === 'In Progress' ? '#ffd700' : ticket.status === 'Resolved' ? '#4caf50' : '#b8b8b8'};">
+                                ${ticket.status}
+                            </span>
+                        </td>
+                        <td style="padding:0.6rem;">${ticket.raisedBy}</td>
+                        <td style="padding:0.6rem;">${ticket.raisedAt}</td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+
+            // Add click event to each row
+            document.querySelectorAll('.agent-ticket-row').forEach(row => {
+                row.addEventListener('click', function () {
+                    const ticketNum = this.getAttribute('data-ticket');
+                    showAgentTicketDetail(ticketNum);
+                });
+            });
+        }
+
+        // Show ticket detail modal for agent
+        function showAgentTicketDetail(ticketNum) {
+            const ticket = agentTickets.find(t => t.number === ticketNum);
+            if (!ticket) return;
+            const modal = document.getElementById('agent-ticket-detail-modal');
+            const content = document.getElementById('agent-modal-content');
+            content.innerHTML = `
+                <p><strong>Ticket Number:</strong> ${ticket.number}</p>
+                <p><strong>Subject:</strong> ${ticket.subject}</p>
+                <p><strong>Description:</strong> ${ticket.description}</p>
+                <p><strong>Category:</strong> ${ticket.category}</p>
+                <p><strong>Status:</strong> <span style="color:${ticket.status === 'Open' ? '#ffb347' : ticket.status === 'In Progress' ? '#ffd700' : ticket.status === 'Resolved' ? '#4caf50' : '#b8b8b8'};">${ticket.status}</span></p>
+                <p><strong>Raised By:</strong> ${ticket.raisedBy}</p>
+                <p><strong>Raised At:</strong> ${ticket.raisedAt}</p>
+            `;
+            modal.style.display = "flex";
+        }
+
+        // Close modal logic
+        document.addEventListener('DOMContentLoaded', function () {
+            renderAgentTickets();
+            document.getElementById('agent-close-modal').onclick = function () {
+                document.getElementById('agent-ticket-detail-modal').style.display = "none";
+            };
+            // Close modal on outside click
+            document.getElementById('agent-ticket-detail-modal').addEventListener('click', function (e) {
+                if (e.target === this) this.style.display = "none";
+            });
+        });
+
+        // Find and show ticket for update
+        document.getElementById('find-ticket-btn').addEventListener('click', function () {
+            const ticketNum = document.getElementById('update-ticket-number').value.trim().toUpperCase();
+            const ticket = agentTickets.find(t => t.number === ticketNum);
+            const detailsDiv = document.getElementById('update-ticket-details');
+            const updateSection = document.getElementById('update-status-section');
+            if (!ticket) {
+                updateSection.style.display = "block";
+                detailsDiv.innerHTML = `<p style="color:#ff4d4f;">No ticket found with this number.</p>`;
+                document.getElementById('status-change-form').style.display = "none";
+                return;
+            }
+            detailsDiv.innerHTML = `
+                <p><strong>Ticket Number:</strong> ${ticket.number}</p>
+                <p><strong>Subject:</strong> ${ticket.subject}</p>
+                <p><strong>Description:</strong> ${ticket.description}</p>
+                <p><strong>Category:</strong> ${ticket.category}</p>
+                <p><strong>Status:</strong> <span style="color:${ticket.status === 'Open' ? '#ffb347' : ticket.status === 'In Progress' ? '#ffd700' : ticket.status === 'Resolved' ? '#4caf50' : '#b8b8b8'};">${ticket.status}</span></p>
+                <p><strong>Raised By:</strong> ${ticket.raisedBy}</p>
+                <p><strong>Raised At:</strong> ${ticket.raisedAt}</p>
+            `;
+            document.getElementById('status-change-form').style.display = "block";
+            updateSection.style.display = "block";
+            document.getElementById('new-status').value = ticket.status;
+        });
+
+        // Update ticket status logic
+        document.getElementById('status-change-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const ticketNum = document.getElementById('update-ticket-number').value.trim().toUpperCase();
+            const newStatus = document.getElementById('new-status').value;
+            const ticket = agentTickets.find(t => t.number === ticketNum);
+            if (!ticket) {
+                alert('No ticket found.');
+                return;
+            }
+            ticket.status = newStatus;
+            alert('Ticket status updated to "' + newStatus + '"!');
+            // Optionally, re-render the ticket details and ticket list
+            document.getElementById('find-ticket-btn').click();
+            renderAgentTickets();
+        });
+
+
+
+        // Profile Edit/Save logic
+        const editBtn = document.getElementById('edit-profile-btn');
+        const saveBtn = document.getElementById('save-profile-btn');
+        const profileForm = document.getElementById('profile-form');
+        const fields = ['ro-name', 'ro-code', 'ro-location', 'username', 'password'];
+
+        editBtn.addEventListener('click', function () {
+            fields.forEach(id => document.getElementById(id).disabled = false);
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'block';
+        });
+
+        profileForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            fields.forEach(id => document.getElementById(id).disabled = true);
+            editBtn.style.display = 'block';
+            saveBtn.style.display = 'none';
+            alert('Profile updated successfully!');
+        });
+
+
+
+    </script>
+</body>
+
+</html>

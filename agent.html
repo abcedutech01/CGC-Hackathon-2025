@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Dashboard - Sewak-Desk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="agent.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sewak-Desk - Agent Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-section="assign">View Tickets</a></li>
+                <li><a href="#" class="nav-link" data-section="update">Update Ticket Status</a></li>
+                <li><a href="#" class="nav-link" data-section="profile">Profile & Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="dashboard" class="section-content active">
+            <h2>Welcome, Support Agent!</h2>
+            <ul class="feature-list">
+                <li>Monitor and assign new support tickets to yourself or other agents.</li>
+                <li>Update ticket statuses as you work on resolving issues.</li>
+                <li>Communicate with users through ticket comments and updates.</li>
+                <li>View all tickets assigned to you and manage your workload efficiently.</li>
+                <li>Access your profile and notification preferences for a personalized experience.</li>
+            </ul>
+            <div style="margin-top:2rem; background:#2d2347; border-radius:12px; padding:1.5rem;">
+                <h3 style="color:#a259ff; margin-bottom:1rem;">How to Be an Effective Agent</h3>
+                <ol style="color:#f3f3f3; margin-left:1.2rem;">
+                    <li><strong>Check for New Tickets:</strong> Regularly visit the <span
+                            style="color:#a259ff;">View/Assign Tickets</span> section to see unassigned tickets and take
+                        ownership.</li>
+                    <li><strong>Update Status:</strong> Use <span style="color:#a259ff;">Update Ticket Status</span> to
+                        keep users informed about progress.</li>
+                    <li><strong>Communicate Clearly:</strong> Add helpful comments and updates to tickets for better
+                        collaboration and transparency.</li>
+                    <li><strong>Stay Organized:</strong> Prioritize tickets based on urgency and category for efficient
+                        resolution.</li>
+                    <li><strong>Profile Management:</strong> Keep your profile and notification settings up to date in
+                        <span style="color:#a259ff;">Profile & Settings</span>.
+                    </li>
+                </ol>
+                <div style="margin-top:1.5rem;">
+                    <strong style="color:#a259ff;">Tips:</strong>
+                    <ul style="color:#b8b8b8; margin-left:1.2rem;">
+                        <li>Respond to users promptly to improve satisfaction.</li>
+                        <li>Document solutions for recurring issues.</li>
+                        <li>Collaborate with other agents for complex problems.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="assign" class="section-content">
+            <h2>View Tickets</h2>
+            <div id="agent-tickets-list" style="margin-top:1.5rem;">
+                <!-- Tickets will be rendered here -->
+            </div>
+            <div id="agent-ticket-detail-modal"
+                style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(24,16,40,0.85); z-index:1000; align-items:center; justify-content:center;">
+                <div
+                    style="background:#231942; color:#f3f3f3; border-radius:12px; max-width:400px; width:90%; padding:2rem; position:relative; box-shadow:0 8px 32px #0008;">
+                    <button id="agent-close-modal"
+                        style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:#a259ff; font-size:1.5rem; cursor:pointer;">&times;</button>
+                    <h3 style="color:#a259ff;">Ticket Details</h3>
+                    <div id="agent-modal-content"></div>
+                </div>
+            </div>
+        </section>
+        <section id="update" class="section-content">
+            <h2>Update Ticket Status</h2>
+            <form id="update-ticket-form" style="max-width: 400px; margin: 0 auto; text-align: left;">
+                <label for="update-ticket-number" style="display:block;margin-bottom:0.3rem;">Enter Ticket Number<span
+                        style="color:#a259ff;">*</span></label>
+                <input type="text" id="update-ticket-number" name="update-ticket-number" required
+                    style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;margin-bottom:1rem;">
+                <button type="button" class="cta-btn" id="find-ticket-btn" style="width:100%;">Find Ticket</button>
+            </form>
+            <div id="update-status-section" style="display:none; margin-top:2rem;">
+                <h3 style="color:#a259ff;">Ticket Details</h3>
+                <div id="update-ticket-details"></div>
+                <form id="status-change-form" style="margin-top:1.2rem;">
+                    <label for="new-status" style="display:block;margin-bottom:0.3rem;">Change Status</label>
+                    <select id="new-status" name="new-status" required>
+                        <option value="">Select Status</option>
+                        <option value="Open">Open</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                        <option value="Closed">Closed</option>
+                    </select>
+                    <button type="submit" class="cta-btn" style="width:100%;margin-top:0.7rem;">Update Status</button>
+                </form>
+            </div>
+        </section>
+        <section id="profile" class="section-content">
+            <h2>Profile & Settings</h2>
+            <form id="agent-profile-form" style="max-width: 500px; margin: 0 auto; text-align: left;">
+                <div style="margin-bottom:1rem;">
+                    <label for="agent-name" style="display:block;margin-bottom:0.3rem;">Agent Name</label>
+                    <input type="text" id="agent-name" name="agent-name" value="Raj Kumar" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="agent-id" style="display:block;margin-bottom:0.3rem;">Agent ID</label>
+                    <input type="text" id="agent-id" name="agent-id" value="RAJ2025" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="agent-email" style="display:block;margin-bottom:0.3rem;">Email</label>
+                    <input type="email" id="agent-email" name="agent-email" value="raj@sewakdesk.com" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="agent-username" style="display:block;margin-bottom:0.3rem;">Username</label>
+                    <input type="text" id="agent-username" name="agent-username" value="raj2025" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <label for="agent-password" style="display:block;margin-bottom:0.3rem;">Password</label>
+                    <input type="password" id="agent-password" name="agent-password" value="password" disabled
+                        style="width:100%;padding:0.6rem;border-radius:6px;border:none;background:#2d2347;color:#f3f3f3;">
+                </div>
+                <button type="button" id="edit-agent-profile-btn" class="cta-btn"
+                    style="width:100%;margin-top:0.5rem;">Edit Information</button>
+                <button type="submit" id="save-agent-profile-btn" class="cta-btn"
+                    style="width:100%;margin-top:0.5rem;display:none;">Save Changes</button>
+                <button type="button" id="logout-agent-btn" class="cta-btn"
+                    style="width:100%;margin-top:1.2rem;background:#ff4d4f; background:linear-gradient(90deg,#ff4d4f,#a259ff);">Logout</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        // Navigation tab switching logic
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section-content');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.getAttribute('data-section');
+                sections.forEach(sec => {
+                    sec.classList.remove('active');
+                    if (sec.id === sectionId) sec.classList.add('active');
+                });
+            });
+        });
+
+        // Demo tickets for the agent (current month)
+        const agentTickets = [
+            {
+                number: "TK2001",
+                subject: "Network issue in Block A",
+                description: "Internet is not working in Block A, 2nd floor.",
+                category: "Technical Issue",
+                status: "Open",
+                raisedBy: "RO 1",
+                raisedAt: "2025-08-01 09:30 AM"
+            },
+            {
+                number: "TK2002",
+                subject: "AC not cooling",
+                description: "The AC in conference room is not cooling.",
+                category: "Mechanical Issue",
+                status: "In Progress",
+                raisedBy: "RO 2",
+                raisedAt: "2025-07-03 11:10 AM"
+            },
+            {
+                number: "TK2003",
+                subject: "Power socket sparking",
+                description: "Power socket in lab is sparking when used.",
+                category: "Electrical Issue",
+                status: "Open",
+                raisedBy: "RO 3",
+                raisedAt: "2025-07-05 02:45 PM"
+            },
+            {
+                number: "TK2004",
+                subject: "Printer not working",
+                description: "Printer in Block B is not responding.",
+                category: "Technical Issue",
+                status: "Resolved",
+                raisedBy: "RO 4",
+                raisedAt: "2025-07-10 03:20 PM"
+            },
+            {
+                number: "TK2005",
+                subject: "Water leakage in cafeteria",
+                description: "Water is leaking from the ceiling in the cafeteria.",
+                category: "Maintenance Issue",
+                status: "Closed",
+                raisedBy: "RO 5",
+                raisedAt: "2025-07-15 10:00 AM"
+            },
+            {
+                number: "TK2006",
+                subject: "Laptop not booting",
+                description: "My laptop is not booting up, need urgent help.",
+                category: "Technical Issue",
+                status: "Open",
+                raisedBy: "RO 6",
+                raisedAt: "2025-07-20 01:15 PM"
+            },
+            {
+                number: "TK2007",
+                subject: "Broken chair in meeting room",
+                description: "One of the chairs in the meeting room is broken.",
+                category: "Furniture Issue",
+                status: "In Progress",
+                raisedBy: "RO 7",
+                raisedAt: "2025-07-25 04:30 PM"
+            },
+            {
+                number: "TK2008",
+                subject: "Software installation request",
+                description: "Need to install new software on my workstation.",
+                category: "Software Issue",
+                status: "Open",
+                raisedBy: "RO 8",
+                raisedAt: "2025-07-28 08:00 AM"
+            },
+            {
+                number: "TK2009",
+                subject: "Broken window in Block C",
+                description: "Window in Block C, 3rd floor is broken.",
+                category: "Maintenance Issue",
+                status: "Resolved",
+                raisedBy: "RO 9",
+                raisedAt: "2025-07-30 12:00 PM"
+            },
+            {
+                number: "TK2010",
+                subject: "Request for additional monitor",
+                description: "Need an additional monitor for my workstation.",
+                category: "Equipment Request",
+                status: "Closed",
+                raisedBy: "RO 10",
+                raisedAt: "2025-07-31 05:00 PM"
+            }
+
+        ];
+
+        // Render agent tickets list
+        function renderAgentTickets() {
+            const container = document.getElementById('agent-tickets-list');
+            if (!agentTickets.length) {
+                container.innerHTML = "<p style='color:#b8b8b8;'>No tickets found for this month.</p>";
+                return;
+            }
+            let html = `<table style="width:100%;border-collapse:collapse;">
+                <thead>
+                    <tr style="background:#2d2347;">
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Ticket #</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Subject</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Category</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Status</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Raised By</th>
+                        <th style="padding:0.7rem;color:#a259ff;text-align:left;">Raised At</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            agentTickets.forEach(ticket => {
+                html += `
+                    <tr class="agent-ticket-row" data-ticket="${ticket.number}" style="cursor:pointer;transition:background 0.2s;">
+                        <td style="padding:0.6rem;">${ticket.number}</td>
+                        <td style="padding:0.6rem;">${ticket.subject}</td>
+                        <td style="padding:0.6rem;">${ticket.category}</td>
+                        <td style="padding:0.6rem;">
+                            <span style="color:${ticket.status === 'Open' ? '#ffb347' : ticket.status === 'In Progress' ? '#ffd700' : ticket.status === 'Resolved' ? '#4caf50' : '#b8b8b8'};">
+                                ${ticket.status}
+                            </span>
+                        </td>
+                        <td style="padding:0.6rem;">${ticket.raisedBy}</td>
+                        <td style="padding:0.6rem;">${ticket.raisedAt}</td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+
+            // Add click event to each row
+            document.querySelectorAll('.agent-ticket-row').forEach(row => {
+                row.addEventListener('click', function () {
+                    const ticketNum = this.getAttribute('data-ticket');
+                    showAgentTicketDetail(ticketNum);
+                });
+            });
+        }
+
+        // Show ticket detail modal for agent
+        function showAgentTicketDetail(ticketNum) {
+            const ticket = agentTickets.find(t => t.number === ticketNum);
+            if (!ticket) return;
+            const modal = document.getElementById('agent-ticket-detail-modal');
+            const content = document.getElementById('agent-modal-content');
+            content.innerHTML = `
+                <p><strong>Ticket Number:</strong> ${ticket.number}</p>
+                <p><strong>Subject:</strong> ${ticket.subject}</p>
+                <p><strong>Description:</strong> ${ticket.description}</p>
+                <p><strong>Category:</strong> ${ticket.category}</p>
+                <p><strong>Status:</strong> <span style="color:${ticket.status === 'Open' ? '#ffb347' : ticket.status === 'In Progress' ? '#ffd700' : ticket.status === 'Resolved' ? '#4caf50' : '#b8b8b8'};">${ticket.status}</span></p>
+                <p><strong>Raised By:</strong> ${ticket.raisedBy}</p>
+                <p><strong>Raised At:</strong> ${ticket.raisedAt}</p>
+            `;
+            modal.style.display = "flex";
+        }
+
+        // Close modal logic
+        document.addEventListener('DOMContentLoaded', function () {
+            renderAgentTickets();
+            document.getElementById('agent-close-modal').onclick = function () {
+                document.getElementById('agent-ticket-detail-modal').style.display = "none";
+            };
+            // Close modal on outside click
+            document.getElementById('agent-ticket-detail-modal').addEventListener('click', function (e) {
+                if (e.target === this) this.style.display = "none";
+            });
+        });
+
+        // Find and show ticket for update
+        document.getElementById('find-ticket-btn').addEventListener('click', function () {
+            const ticketNum = document.getElementById('update-ticket-number').value.trim().toUpperCase();
+            const ticket = agentTickets.find(t => t.number === ticketNum);
+            const detailsDiv = document.getElementById('update-ticket-details');
+            const updateSection = document.getElementById('update-status-section');
+            if (!ticket) {
+                updateSection.style.display = "block";
+                detailsDiv.innerHTML = `<p style="color:#ff4d4f;">No ticket found with this number.</p>`;
+                document.getElementById('status-change-form').style.display = "none";
+                return;
+            }
+            detailsDiv.innerHTML = `
+                <p><strong>Ticket Number:</strong> ${ticket.number}</p>
+                <p><strong>Subject:</strong> ${ticket.subject}</p>
+                <p><strong>Description:</strong> ${ticket.description}</p>
+                <p><strong>Category:</strong> ${ticket.category}</p>
+                <p><strong>Status:</strong> <span style="color:${ticket.status === 'Open' ? '#ffb347' : ticket.status === 'In Progress' ? '#ffd700' : ticket.status === 'Resolved' ? '#4caf50' : '#b8b8b8'};">${ticket.status}</span></p>
+                <p><strong>Raised By:</strong> ${ticket.raisedBy}</p>
+                <p><strong>Raised At:</strong> ${ticket.raisedAt}</p>
+            `;
+            document.getElementById('status-change-form').style.display = "block";
+            updateSection.style.display = "block";
+            document.getElementById('new-status').value = ticket.status;
+        });
+
+        // Update ticket status logic
+        document.getElementById('status-change-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const ticketNum = document.getElementById('update-ticket-number').value.trim().toUpperCase();
+            const newStatus = document.getElementById('new-status').value;
+            const ticket = agentTickets.find(t => t.number === ticketNum);
+            if (!ticket) {
+                alert('No ticket found.');
+                return;
+            }
+            ticket.status = newStatus;
+            alert('Ticket status updated to "' + newStatus + '"!');
+            // Optionally, re-render the ticket details and ticket list
+            document.getElementById('find-ticket-btn').click();
+            renderAgentTickets();
+        });
+
+        // Profile Edit/Save logic for agent
+        const editAgentBtn = document.getElementById('edit-agent-profile-btn');
+        const saveAgentBtn = document.getElementById('save-agent-profile-btn');
+        const agentProfileForm = document.getElementById('agent-profile-form');
+        const agentFields = ['agent-name', 'agent-id', 'agent-email', 'agent-username', 'agent-password'];
+
+        editAgentBtn.addEventListener('click', function () {
+            agentFields.forEach(id => document.getElementById(id).disabled = false);
+            editAgentBtn.style.display = 'none';
+            saveAgentBtn.style.display = 'block';
+        });
+
+        agentProfileForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            agentFields.forEach(id => document.getElementById(id).disabled = true);
+            editAgentBtn.style.display = 'block';
+            saveAgentBtn.style.display = 'none';
+            alert('Profile updated successfully!');
+        });
+
+        document.getElementById('logout-agent-btn').addEventListener('click', function () {
+            // Replace with real logout logic as needed
+            alert('You have been logged out.');
+            window.location.href = "login.html";
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sewak-Desk - Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sewak-Desk</h1>
+    </header>
+    <main>
+        <div class="register-container">
+            <h2>Create Your Account</h2>
+            <form class="register-form" autocomplete="off">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required minlength="6">
+                <select required>
+                    <option value="">Select Role</option>
+                    <option value="enduser">End User</option>
+                    <option value="agent">Support Agent</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit" class="register-btn">Register</button>
+            </form>
+            <div class="divider">or</div>
+            <div class="social-login">
+                <button type="button" class="social-btn google-btn" onclick="googleRegister()">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                        alt="Google">
+                    Register with Google
+                </button>
+                <button type="button" class="social-btn twitter-btn" onclick="twitterRegister()">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg"
+                        alt="Twitter">
+                    Register with Twitter
+                </button>
+            </div>
+            <a href="login.html" class="login-link">Already have an account? Login</a>
+        </div>
+    </main>
+    <script>
+        // Prevent default form submission for demo
+        document.querySelector('.register-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Registration logic goes here.');
+        });
+        // Placeholder functions for social registration
+        function googleRegister() {
+            alert('Google registration integration goes here.');
+            // Redirect to Google OAuth endpoint in real implementation
+        }
+        function twitterRegister() {
+            alert('Twitter registration integration goes here.');
+            // Redirect to Twitter OAuth endpoint in real implementation
+        }
+    </script>

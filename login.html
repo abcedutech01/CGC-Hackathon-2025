@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sewak-Desk - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sewak-Desk</h1>
+    </header>
+    <main>
+        <div class="login-container">
+            <h2>Login to Sewak-Desk</h2>
+            <form class="login-form" autocomplete="off">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <select required>
+                    <option value="">Select Role</option>
+                    <option value="enduser">End User</option>
+                    <option value="agent">Support Agent</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="divider">or</div>
+            <div class="social-login">
+                <button type="button" class="social-btn google-btn" onclick="googleLogin()">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                        alt="Google">
+                    Login with Google
+                </button>
+                <button type="button" class="social-btn twitter-btn" onclick="twitterLogin()">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg"
+                        alt="Twitter">
+                    Login with Twitter
+                </button>
+            </div>
+            <a href="register.html" class="register-link">Don't have an account? Register</a>
+        </div>
+    </main>
+    <script>
+        // Placeholder functions for social login
+        function googleLogin() {
+            alert('Google login integration goes here.');
+            // Redirect to Google OAuth endpoint in real implementation
+        }
+        function twitterLogin() {
+            alert('Twitter login integration goes here.');
+            // Redirect to Twitter OAuth endpoint in real implementation
+        }
+        // Demo: Show which role is logging in
+        document.querySelector('.login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const role = document.querySelector('.login-form select').value;
+            if (!role) {
+                alert('Please select your role.');
+                return;
+            }
+            alert('Logged in as: ' + role.replace('enduser', 'End User').replace('agent', 'Support Agent').replace('admin', 'Admin'));
+            // Redirect or handle login logic here
+        });
+    </script>

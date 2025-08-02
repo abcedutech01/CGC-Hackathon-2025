@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sewak-Desk - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="landing.css">
+</head>
+
+<body>
+    <header>
+        <h1>Sewak-Desk</h1>
+        <nav>
+            <ul>
+                <li><a href="login.html" id="login-link">Login</a></li>
+                <li><a href="register.html" id="register-link">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome to Sewak-Desk</h2>
+            <p>
+                Sewak-Desk is a simple, easy-to-use help desk solution.<br>
+                Raise support tickets, track their status, and communicate with support staff efficiently.
+            </p>
+            <button class="cta-btn" onclick="window.location.href='login.html'">Login</button>
+            <button class="cta-btn" onclick="window.location.href='register.html'">Register</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Sewak-Desk</p>
+    </footer>
+    <script>
+        // Highlight active nav link based on current page
+        const links = {
+            'login.html': 'login-link',
+            'register.html': 'register-link'
+        };
+        const path = window.location.pathname.split('/').pop();
+        if (links[path]) {
+            document.getElementById(links[path]).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

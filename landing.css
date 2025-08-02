@@ -1,0 +1,159 @@
+:root {
+            --primary-dark: #181028;
+            --primary-purple: #a259ff;
+            --accent: #5d3fd3;
+            --text-light: #f3f3f3;
+            --text-muted: #b8b8b8;
+            --card-bg: #231942;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 60%, var(--primary-purple) 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--primary-dark);
+            color: var(--primary-purple);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(162, 89, 255, 0.08);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--primary-purple);
+            text-shadow: 0 2px 8px #0002;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1.1rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+            font-size: 1rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--primary-purple);
+            color: var(--primary-dark);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(162, 89, 255, 0.13);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: var(--primary-purple);
+            margin-bottom: 1.1rem;
+            font-weight: 700;
+        }
+
+        section p {
+            font-size: 1.13rem;
+            color: var(--text-muted);
+            margin-bottom: 1.7rem;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent));
+            color: #fff;
+            padding: 0.8rem 2.2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(162, 89, 255, 0.13);
+            transition: background 0.2s, transform 0.2s;
+            letter-spacing: 1px;
+            margin: 0.5rem 0.5rem 0 0.5rem;
+        }
+
+        .cta-btn:hover {
+            background: linear-gradient(90deg, var(--accent), var(--primary-purple));
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--primary-purple);
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+
+            header,
+            main,
+            section {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.5rem 0.5rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            header h1 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
